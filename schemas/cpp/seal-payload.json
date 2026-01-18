@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritaschain.org/schemas/cpp/1.0/seal-payload.json",
+  "title": "CPP Seal Payload",
+  "description": "Payload schema for CPP_SEAL events with Completeness Invariant",
+  "type": "object",
+  "required": [
+    "collection_id",
+    "event_count",
+    "merkle_root",
+    "completeness_invariant",
+    "external_anchor"
+  ],
+  "properties": {
+    "collection_id": {
+      "type": "string",
+      "description": "Collection identifier being sealed"
+    },
+    "event_count": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total number of events in collection"
+    },
+    "merkle_root": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "RFC 6962 Merkle tree root hash"
+    },
+    "completeness_invariant": {
+      "$ref": "#/$defs/completenessInvariant"
+    },
+    "external_anchor": {
+      "$ref": "#/$defs/externalAnchor"
+    }
+  },
+  "$defs": {
+    "completenessInvariant": {
+      "type": "object",
+      "required": [
+        "expected_count",
+        "hash_sum",
+        "first_timestamp",
+        "last_timestamp"
+      ],
+      "properties": {
+        "expected_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Expected number of events"
+        },
+        "hash_sum": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "description": "XOR of all event hashes: H(E1) ⊕ H(E2) ⊕ ... ⊕ H(En)"
+        },
+        "first_event_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of first event in collection"
+        },
+        "last_event_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "ID of last event in collection"
+        },
+        "first_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of first event"
+        },
+        "last_timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of last event"
+        }
+      },
+      "description": "Completeness Invariant for deletion detection"
+    },
+    "externalAnchor": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["RFC3161", "SCITT", "BLOCKCHAIN"],
+          "description": "Type of external anchor"
+        },
+        "tsa_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "TSA service URL"
+        },
+        "timestamp_token": {
+          "type": "string",
+          "pattern": "^base64:[A-Za-z0-9+/=]+$",
+          "description": "RFC 3161 timestamp token"
+        },
+        "tsa_certificate": {
+          "type": "string",
+          "pattern": "^base64:[A-Za-z0-9+/=]+$",
+          "description": "TSA certificate chain"
+        },
+        "anchored_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time when anchor was created"
+        }
+      }
+    }
+  }
+}

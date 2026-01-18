@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritaschain.org/schemas/cpp/1.0/ace/capture-att-payload.json",
+  "title": "CPP ACE Capture Attestation Payload",
+  "description": "Payload for CPP_CAPTURE_ATT events with zero-knowledge biometric attestation",
+  "type": "object",
+  "required": [
+    "media_hash",
+    "media_type",
+    "capture_device",
+    "auth_attempt",
+    "device_attestation",
+    "privacy_declaration"
+  ],
+  "properties": {
+    "media_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "media_type": {
+      "type": "string"
+    },
+    "capture_device": {
+      "type": "object"
+    },
+    "location": {
+      "oneOf": [
+        { "type": "null" },
+        { "type": "object" }
+      ]
+    },
+    "auth_attempt": {
+      "$ref": "#/$defs/authAttempt"
+    },
+    "device_attestation": {
+      "$ref": "#/$defs/deviceAttestation"
+    },
+    "duress_indicators": {
+      "$ref": "#/$defs/duressIndicators"
+    },
+    "privacy_declaration": {
+      "type": "string",
+      "const": "NO_BIOMETRIC_DATA_STORED",
+      "description": "REQUIRED declaration that no biometric data is stored"
+    }
+  },
+  "$defs": {
+    "authAttempt": {
+      "type": "object",
+      "required": ["method", "result", "timestamp"],
+      "properties": {
+        "method": {
+          "type": "string",
+          "enum": [
+            "FACE_ID",
+            "TOUCH_ID",
+            "FINGERPRINT",
+            "PIN",
+            "PATTERN",
+            "IRIS",
+            "VOICE",
+            "OTHER"
+          ],
+          "description": "Authentication method used (NOT the biometric data)"
+        },
+        "result": {
+          "type": "string",
+          "enum": ["SUCCESS", "FAILURE", "TIMEOUT", "CANCELLED"],
+          "description": "Result of authentication attempt"
+        },
+        "duration_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Duration of authentication in milliseconds"
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Time of authentication attempt"
+        }
+      },
+      "description": "Authentication attempt metadata (NO biometric data)"
+    },
+    "deviceAttestation": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "APPLE_DEVICE_ATTESTATION",
+            "ANDROID_PLAY_INTEGRITY",
+            "TPM_ATTESTATION",
+            "HSM_ATTESTATION",
+            "NONE"
+          ]
+        },
+        "attestation_object": {
+          "type": "string",
+          "pattern": "^base64:[A-Za-z0-9+/=]+$",
+          "description": "Platform-specific attestation object"
+        },
+        "secure_enclave_verified": {
+          "type": "boolean",
+          "description": "Whether Secure Enclave/TEE verification passed"
+        },
+        "app_integrity": {
+          "type": "string",
+          "enum": ["VALID", "INVALID", "UNKNOWN"]
+        }
+      }
+    },
+    "duressIndicators": {
+      "type": "object",
+      "properties": {
+        "rapid_repeated_attempts": {
+          "type": "boolean",
+          "description": "Unusual number of rapid auth attempts"
+        },
+        "unusual_time": {
+          "type": "boolean",
+          "description": "Capture at unusual time for user"
+        },
+        "location_anomaly": {
+          "type": "boolean",
+          "description": "Location inconsistent with pattern"
+        }
+      },
+      "description": "Indicators that capture may be under duress"
+    }
+  },
+  "additionalProperties": false
+}

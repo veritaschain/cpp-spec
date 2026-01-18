@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritaschain.org/schemas/cpp/1.0/event.json",
+  "title": "CPP Event",
+  "description": "Base schema for all CPP events",
+  "type": "object",
+  "required": [
+    "cpp_version",
+    "event_id",
+    "event_type",
+    "timestamp",
+    "device_id",
+    "sequence_number",
+    "prev_hash",
+    "payload",
+    "signature"
+  ],
+  "properties": {
+    "cpp_version": {
+      "type": "string",
+      "const": "1.0",
+      "description": "CPP specification version"
+    },
+    "event_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique event identifier (UUIDv7 recommended)"
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "CPP_CAPTURE",
+        "CPP_CAPTURE_ATT",
+        "CPP_SEAL",
+        "CPP_SHARE",
+        "CPP_VERIFY",
+        "CPP_DELETE"
+      ],
+      "description": "Type of CPP event"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp with millisecond precision"
+    },
+    "device_id": {
+      "type": "string",
+      "pattern": "^urn:uuid:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "description": "Device URN identifier"
+    },
+    "sequence_number": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Sequential event number within collection"
+    },
+    "prev_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "SHA-256 hash of previous event (all zeros for genesis)"
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event-specific payload data"
+    },
+    "signature": {
+      "$ref": "#/$defs/signature"
+    }
+  },
+  "$defs": {
+    "signature": {
+      "type": "object",
+      "required": ["algorithm", "public_key", "value"],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": ["Ed25519", "ECDSA-P256"],
+          "description": "Signature algorithm"
+        },
+        "public_key": {
+          "type": "string",
+          "pattern": "^base64:[A-Za-z0-9+/=]+$",
+          "description": "Base64-encoded public key"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^base64:[A-Za-z0-9+/=]+$",
+          "description": "Base64-encoded signature value"
+        }
+      }
+    }
+  }
+}

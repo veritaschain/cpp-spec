@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritaschain.org/schemas/cpp/1.0/verification-pack.json",
+  "title": "CPP Verification Pack",
+  "description": "Complete data bundle for verifying a CPP capture",
+  "type": "object",
+  "required": [
+    "verification_pack_version",
+    "verification_code",
+    "verification_url",
+    "created_at",
+    "capture_event",
+    "seal_event",
+    "merkle_proof",
+    "completeness_invariant",
+    "external_anchor"
+  ],
+  "properties": {
+    "verification_pack_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "verification_code": {
+      "type": "string",
+      "pattern": "^CPP-[0-9]{4}-[A-Z0-9]{9,}$",
+      "description": "Unique verification code"
+    },
+    "verification_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://verify\\.veritaschain\\.org/cpp/",
+      "description": "Permanent verification URL"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "capture_event": {
+      "$ref": "event.json",
+      "description": "The original capture event"
+    },
+    "seal_event": {
+      "$ref": "event.json",
+      "description": "The seal event for the collection"
+    },
+    "merkle_proof": {
+      "$ref": "#/$defs/merkleProof"
+    },
+    "completeness_invariant": {
+      "type": "object",
+      "required": ["expected_count", "hash_sum"],
+      "properties": {
+        "expected_count": { "type": "integer" },
+        "hash_sum": { "type": "string" }
+      }
+    },
+    "external_anchor": {
+      "type": "object"
+    },
+    "recovery": {
+      "$ref": "#/$defs/recovery"
+    },
+    "qr_code_url": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "$defs": {
+    "merkleProof": {
+      "type": "object",
+      "required": ["leaf_hash", "leaf_index", "tree_size", "audit_path", "directions"],
+      "properties": {
+        "leaf_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "leaf_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tree_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "audit_path": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          }
+        },
+        "directions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["L", "R"]
+          }
+        }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "properties": {
+        "phash_algorithm": {
+          "type": "string",
+          "enum": ["pHash-DCT", "aHash", "dHash"]
+        },
+        "phash_value": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{16}$",
+          "description": "64-bit perceptual hash"
+        }
+      }
+    }
+  }
+}

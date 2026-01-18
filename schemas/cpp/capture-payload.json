@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://veritaschain.org/schemas/cpp/1.0/capture-payload.json",
+  "title": "CPP Capture Payload",
+  "description": "Payload schema for CPP_CAPTURE events",
+  "type": "object",
+  "required": [
+    "media_hash",
+    "media_type",
+    "capture_device",
+    "collection_id"
+  ],
+  "properties": {
+    "media_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "description": "SHA-256 hash of media content"
+    },
+    "media_type": {
+      "type": "string",
+      "pattern": "^(image|video)/[a-z0-9.+-]+$",
+      "description": "MIME type of media"
+    },
+    "media_size_bytes": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Size of media file in bytes"
+    },
+    "capture_device": {
+      "$ref": "#/$defs/captureDevice"
+    },
+    "location": {
+      "oneOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/location" }
+      ],
+      "description": "Location data (null if privacy mode)"
+    },
+    "camera_settings": {
+      "$ref": "#/$defs/cameraSettings"
+    },
+    "collection_id": {
+      "type": "string",
+      "description": "Collection identifier"
+    }
+  },
+  "$defs": {
+    "captureDevice": {
+      "type": "object",
+      "required": ["manufacturer", "model"],
+      "properties": {
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "sensor_id": {
+          "type": "string"
+        },
+        "firmware_version": {
+          "type": "string"
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": ["precision", "consent"],
+      "properties": {
+        "precision": {
+          "type": "string",
+          "enum": ["CITY", "REGION", "EXACT"]
+        },
+        "latitude": {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        },
+        "longitude": {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        "consent": {
+          "type": "object",
+          "required": ["granted_at", "scope"],
+          "properties": {
+            "granted_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "scope": {
+              "type": "string",
+              "enum": ["THIS_CAPTURE", "THIS_COLLECTION", "ALL"]
+            },
+            "revocable": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "cameraSettings": {
+      "type": "object",
+      "properties": {
+        "iso": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "aperture": {
+          "type": "string",
+          "pattern": "^f/[0-9.]+"
+        },
+        "shutter_speed": {
+          "type": "string"
+        },
+        "focal_length_mm": {
+          "type": "number",
+          "minimum": 0
+        }
+      }
+    }
+  }
+}

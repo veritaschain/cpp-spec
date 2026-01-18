@@ -1,0 +1,135 @@
+{
+  "test_suite": "CPP Completeness Invariant Verification",
+  "version": "1.0",
+  "description": "Test vectors for verifying Completeness Invariant implementation",
+  
+  "test_cases": [
+    {
+      "id": "CI-001",
+      "name": "Valid collection with 3 events",
+      "description": "All events present, completeness invariant should pass",
+      "events": [
+        {
+          "event_id": "e1",
+          "hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        {
+          "event_id": "e2",
+          "hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        {
+          "event_id": "e3",
+          "hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      ],
+      "completeness_invariant": {
+        "expected_count": 3,
+        "hash_sum": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+        "computation": "XOR(0x1111...1111, 0x2222...2222, 0x3333...3333) = 0x0000...0000"
+      },
+      "expected_result": "VALID"
+    },
+    
+    {
+      "id": "CI-002",
+      "name": "Missing event (deletion attack)",
+      "description": "Event e2 deleted, completeness invariant should detect",
+      "events": [
+        {
+          "event_id": "e1",
+          "hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        {
+          "event_id": "e3",
+          "hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      ],
+      "completeness_invariant": {
+        "expected_count": 3,
+        "hash_sum": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "computed_hash_sum": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "expected_result": "COMPLETENESS_VIOLATION",
+      "violation_reasons": [
+        "Count mismatch: expected 3, got 2",
+        "Hash sum mismatch"
+      ]
+    },
+    
+    {
+      "id": "CI-003",
+      "name": "Fake event added",
+      "description": "Attacker adds fake event, completeness invariant should detect",
+      "events": [
+        {
+          "event_id": "e1",
+          "hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        {
+          "event_id": "e2",
+          "hash": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        {
+          "event_id": "e3",
+          "hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        },
+        {
+          "event_id": "e_fake",
+          "hash": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      ],
+      "completeness_invariant": {
+        "expected_count": 3,
+        "hash_sum": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected_result": "COMPLETENESS_VIOLATION",
+      "violation_reasons": [
+        "Count mismatch: expected 3, got 4",
+        "Hash sum mismatch"
+      ]
+    },
+    
+    {
+      "id": "CI-004",
+      "name": "Event replaced",
+      "description": "Attacker replaces e2 with different content, should detect",
+      "events": [
+        {
+          "event_id": "e1",
+          "hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+        },
+        {
+          "event_id": "e2",
+          "hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "note": "Original was 0x2222...2222"
+        },
+        {
+          "event_id": "e3",
+          "hash": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+        }
+      ],
+      "completeness_invariant": {
+        "expected_count": 3,
+        "hash_sum": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "expected_result": "COMPLETENESS_VIOLATION",
+      "violation_reasons": [
+        "Hash sum mismatch (count is correct but content changed)"
+      ]
+    }
+  ],
+  
+  "xor_computation_reference": {
+    "algorithm": "Bitwise XOR of all event hashes",
+    "example": {
+      "inputs": [
+        "0x1111111111111111111111111111111111111111111111111111111111111111",
+        "0x2222222222222222222222222222222222222222222222222222222222222222",
+        "0x3333333333333333333333333333333333333333333333333333333333333333"
+      ],
+      "step1": "0x1111...1111 XOR 0x2222...2222 = 0x3333...3333",
+      "step2": "0x3333...3333 XOR 0x3333...3333 = 0x0000...0000",
+      "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  }
+}

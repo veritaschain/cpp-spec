@@ -1,0 +1,107 @@
+{
+  "test_suite": "CPP JSON Canonicalization (RFC 8785)",
+  "version": "1.0",
+  "description": "Test vectors for verifying JCS canonicalization before hashing/signing",
+  
+  "test_cases": [
+    {
+      "id": "CANON-001",
+      "name": "Basic event canonicalization",
+      "input": {
+        "cpp_version": "1.0",
+        "timestamp": "2026-01-18T10:30:00.000Z",
+        "event_type": "CPP_CAPTURE",
+        "event_id": "01932f5a-7b8c-7def-8abc-123456789012"
+      },
+      "canonical_output": "{\"cpp_version\":\"1.0\",\"event_id\":\"01932f5a-7b8c-7def-8abc-123456789012\",\"event_type\":\"CPP_CAPTURE\",\"timestamp\":\"2026-01-18T10:30:00.000Z\"}",
+      "note": "Keys are sorted alphabetically per RFC 8785"
+    },
+    
+    {
+      "id": "CANON-002",
+      "name": "Nested object canonicalization",
+      "input": {
+        "payload": {
+          "media_hash": "sha256:abc",
+          "capture_device": {
+            "model": "iPhone",
+            "manufacturer": "Apple"
+          }
+        }
+      },
+      "canonical_output": "{\"payload\":{\"capture_device\":{\"manufacturer\":\"Apple\",\"model\":\"iPhone\"},\"media_hash\":\"sha256:abc\"}}",
+      "note": "Nested objects also have keys sorted"
+    },
+    
+    {
+      "id": "CANON-003",
+      "name": "Null value handling",
+      "input": {
+        "location": null,
+        "name": "test"
+      },
+      "canonical_output": "{\"location\":null,\"name\":\"test\"}",
+      "note": "Null values are preserved, not omitted"
+    },
+    
+    {
+      "id": "CANON-004",
+      "name": "Number handling",
+      "input": {
+        "integer": 42,
+        "float": 3.14,
+        "negative": -273
+      },
+      "canonical_output": "{\"float\":3.14,\"integer\":42,\"negative\":-273}",
+      "note": "Numbers without unnecessary precision"
+    },
+    
+    {
+      "id": "CANON-005",
+      "name": "Array ordering preserved",
+      "input": {
+        "directions": ["R", "L", "R"],
+        "values": [3, 1, 2]
+      },
+      "canonical_output": "{\"directions\":[\"R\",\"L\",\"R\"],\"values\":[3,1,2]}",
+      "note": "Arrays maintain order (not sorted)"
+    },
+    
+    {
+      "id": "CANON-006",
+      "name": "Unicode handling",
+      "input": {
+        "message": "こんにちは",
+        "emoji": "📷"
+      },
+      "canonical_output": "{\"emoji\":\"📷\",\"message\":\"こんにちは\"}",
+      "note": "UTF-8 characters preserved"
+    },
+    
+    {
+      "id": "CANON-007",
+      "name": "Signature excluded before signing",
+      "input": {
+        "event_id": "abc",
+        "payload": {},
+        "signature": {
+          "algorithm": "Ed25519",
+          "value": "base64:xyz"
+        }
+      },
+      "canonical_for_signing": "{\"event_id\":\"abc\",\"payload\":{}}",
+      "note": "Signature field MUST be removed before canonicalizing for hash/sign"
+    }
+  ],
+  
+  "implementation_notes": {
+    "specification": "RFC 8785 - JSON Canonicalization Scheme (JCS)",
+    "key_rules": [
+      "Sort object keys lexicographically (by UTF-16 code units)",
+      "No whitespace between elements",
+      "Numbers in shortest representation",
+      "Strings use minimal escaping",
+      "Remove signature field before signing"
+    ]
+  }
+}

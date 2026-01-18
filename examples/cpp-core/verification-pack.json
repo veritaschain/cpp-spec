@@ -1,0 +1,108 @@
+{
+  "verification_pack_version": "1.0",
+  "verification_code": "CPP-2026-ABC123XYZ",
+  "verification_url": "https://verify.veritaschain.org/cpp/CPP-2026-ABC123XYZ",
+  "created_at": "2026-01-18T18:00:10.000Z",
+  
+  "capture_event": {
+    "cpp_version": "1.0",
+    "event_id": "01932f5a-7b8c-7def-8abc-123456789012",
+    "event_type": "CPP_CAPTURE",
+    "timestamp": "2026-01-18T10:30:00.000Z",
+    "device_id": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+    "sequence_number": 1,
+    "prev_hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "payload": {
+      "media_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "media_type": "image/heic",
+      "media_size_bytes": 4521984,
+      "capture_device": {
+        "manufacturer": "Apple",
+        "model": "iPhone 16 Pro",
+        "sensor_id": "main_camera",
+        "firmware_version": "18.2.1"
+      },
+      "location": null,
+      "camera_settings": {
+        "iso": 100,
+        "aperture": "f/1.8",
+        "shutter_speed": "1/1000",
+        "focal_length_mm": 24
+      },
+      "collection_id": "album:summer-vacation-2026"
+    },
+    "signature": {
+      "algorithm": "Ed25519",
+      "public_key": "base64:MCowBQYDK2VwAyEAexamplePublicKey123456789ABCDEF==",
+      "value": "base64:exampleSignatureValue1234567890abcdefghijklmnopqrstuvwxyz=="
+    }
+  },
+  
+  "seal_event": {
+    "cpp_version": "1.0",
+    "event_id": "01932f5b-1234-7def-8abc-987654321098",
+    "event_type": "CPP_SEAL",
+    "timestamp": "2026-01-18T18:00:00.000Z",
+    "device_id": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+    "sequence_number": 48,
+    "prev_hash": "sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
+    "payload": {
+      "collection_id": "album:summer-vacation-2026",
+      "event_count": 47,
+      "merkle_root": "sha256:1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "completeness_invariant": {
+        "expected_count": 47,
+        "hash_sum": "sha256:fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321",
+        "first_event_id": "01932f5a-7b8c-7def-8abc-123456789012",
+        "last_event_id": "01932f5a-7b8c-7def-8abc-123456789059",
+        "first_timestamp": "2026-01-18T08:00:00.000Z",
+        "last_timestamp": "2026-01-18T17:55:00.000Z"
+      },
+      "external_anchor": {
+        "type": "RFC3161",
+        "tsa_url": "https://freetsa.org/tsr",
+        "timestamp_token": "base64:MIIExampleTimestampToken...",
+        "tsa_certificate": "base64:MIIExampleCertificate...",
+        "anchored_at": "2026-01-18T18:00:05.000Z"
+      }
+    },
+    "signature": {
+      "algorithm": "Ed25519",
+      "public_key": "base64:MCowBQYDK2VwAyEAexamplePublicKey123456789ABCDEF==",
+      "value": "base64:exampleSealSignatureValue1234567890abcdefghijklmnop=="
+    }
+  },
+  
+  "merkle_proof": {
+    "leaf_hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "leaf_index": 0,
+    "tree_size": 47,
+    "audit_path": [
+      "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+      "sha256:6666666666666666666666666666666666666666666666666666666666666666"
+    ],
+    "directions": ["R", "R", "L", "R", "L", "R"]
+  },
+  
+  "completeness_invariant": {
+    "expected_count": 47,
+    "hash_sum": "sha256:fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321"
+  },
+  
+  "external_anchor": {
+    "type": "RFC3161",
+    "timestamp_token": "base64:MIIExampleTimestampToken...",
+    "tsa_certificate": "base64:MIIExampleCertificate..."
+  },
+  
+  "recovery": {
+    "phash_algorithm": "pHash-DCT",
+    "phash_value": "d4c3b2a1e5f67890"
+  },
+  
+  "qr_code_url": "https://verify.veritaschain.org/cpp/CPP-2026-ABC123XYZ"
+}

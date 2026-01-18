@@ -1,0 +1,72 @@
+{
+  "cpp_version": "1.0",
+  "event_id": "01932f5c-9999-7def-8abc-aceaceaceace",
+  "event_type": "CPP_CAPTURE_ATT",
+  "timestamp": "2026-01-18T14:25:30.000Z",
+  "device_id": "urn:uuid:550e8400-e29b-41d4-a716-446655440000",
+  "sequence_number": 25,
+  "prev_hash": "sha256:aabbccdd11223344aabbccdd11223344aabbccdd11223344aabbccdd11223344",
+  "payload": {
+    "media_hash": "sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+    "media_type": "image/heic",
+    "media_size_bytes": 3847291,
+    "capture_device": {
+      "manufacturer": "Apple",
+      "model": "iPhone 16 Pro",
+      "sensor_id": "main_camera",
+      "firmware_version": "18.2.1"
+    },
+    "location": null,
+    "camera_settings": {
+      "iso": 200,
+      "aperture": "f/2.8",
+      "shutter_speed": "1/500",
+      "focal_length_mm": 77
+    },
+    "collection_id": "album:journalism-assignment-001",
+    
+    "auth_attempt": {
+      "method": "FACE_ID",
+      "result": "SUCCESS",
+      "duration_ms": 45,
+      "timestamp": "2026-01-18T14:25:29.955Z"
+    },
+    
+    "device_attestation": {
+      "type": "APPLE_DEVICE_ATTESTATION",
+      "attestation_object": "base64:o2NmbXRvYXBwbGUtYXBwYXR0ZXN0Z2F0dFN0bXS...",
+      "secure_enclave_verified": true,
+      "app_integrity": "VALID"
+    },
+    
+    "duress_indicators": {
+      "rapid_repeated_attempts": false,
+      "unusual_time": false,
+      "location_anomaly": false
+    },
+    
+    "privacy_declaration": "NO_BIOMETRIC_DATA_STORED"
+  },
+  "signature": {
+    "algorithm": "Ed25519",
+    "public_key": "base64:MCowBQYDK2VwAyEAexampleACEPublicKey123456789ABCDEF==",
+    "value": "base64:exampleACESignatureValue1234567890abcdefghijklmnopqrs=="
+  },
+  
+  "_comment": {
+    "note": "This is an example CPP_CAPTURE_ATT event with ACE extension",
+    "what_is_recorded": [
+      "Authentication method (Face ID)",
+      "Result (SUCCESS/FAILURE)",
+      "Duration (45ms)",
+      "Device attestation status",
+      "Duress indicators"
+    ],
+    "what_is_NOT_recorded": [
+      "Facial geometry",
+      "Biometric templates",
+      "Raw sensor data",
+      "Any biometric identifiers"
+    ]
+  }
+}
