@@ -126,7 +126,7 @@ The application's approach differs fundamentally:
 | 調査B | "RFC 3161 TSA in consumer camera apps: no examples found" |
 | 調査C | "Third-party timestamps: Truepic (B2B), CertiPhoto only" |
 | 調査D | "No pre-2026 iOS app combining all elements exists" |
-| 調査E | "VeriCapture obtains RFC 3161 timestamps for Merkle roots" |
+| 調査E | "VeraSnap obtains RFC 3161 timestamps for Merkle roots" |
 
 **Critical Technical Distinction:**
 
