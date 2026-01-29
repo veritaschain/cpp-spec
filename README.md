@@ -1,7 +1,7 @@
 # Capture Provenance Profile (CPP)
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Spec Version](https://img.shields.io/badge/spec-v1.3-blue.svg)](docs/CPP-Specification-v1.3.md)
+[![Spec Version](https://img.shields.io/badge/spec-v1.4-blue.svg)](docs/CPP-Specification-v1.4.md)
 [![Part of VAP](https://img.shields.io/badge/VAP-Framework-green.svg)](https://github.com/veritaschain)
 
 **Open specification for cryptographically verifiable media capture provenance.**
@@ -55,10 +55,11 @@ Complement, not compete:
 ```
 cpp-spec/
 ├── docs/
-│   └── CPP-Specification-v1.0.md    # Main specification
-│   └── CPP-Specification-v1.1.md    # Main specification
-│   └── CPP-Specification-v1.2.md    # Main specification
-│   └── CPP-Specification-v1.3.md    # Main specification
+│   └── CPP-Specification-v1.0.md
+│   └── CPP-Specification-v1.1.md
+│   └── CPP-Specification-v1.2.md
+│   └── CPP-Specification-v1.3.md
+│   └── CPP-Specification-v1.4.md    # Main specification
 ├── schemas/
 │   ├── cpp/                          # Core JSON schemas
 │   └── ace/                          # ACE extension schemas
