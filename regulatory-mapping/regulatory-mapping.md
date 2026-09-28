@@ -1,5 +1,14 @@
 # CPP Regulatory Mapping
 
+> **Status note (2026-09-28): under revision — read with the corrections below.**
+> This mapping was written for CPP v1.0 (Bronze / Silver / Gold levels) and has not been updated for CPP v1.4 (CPP-BASIC … CPP-FULL). It is a relevance mapping, not a compliance determination: conformance to CPP or any VAP profile does not constitute compliance with any law or regulation, and does not warrant the correctness, fairness, or safety of the underlying decisions (VAP v1.2 §1.6). Each regime applies only within its own jurisdiction.
+>
+> Pending revision, the following statements in this document are withdrawn:
+> - "Verification URL (50+ year SLA)" / "Permanent availability" — no such service-level commitment is published.
+> - "Full forensic evidence grade" and "Suitable for legal proceedings" (Gold) — no CPP Evidence Pack has been accepted in any proceeding; admissibility is for the court or authority to decide.
+> - "Basic GDPR compliance" (Bronze) — privacy-by-design measures and crypto-shredding may support GDPR obligations; they do not determine compliance.
+> - Article 50 of the EU AI Act concerns transparency obligations of providers and deployers of certain AI systems; its application to capture provenance records is not established here.
+
 ## Overview
 
 This document maps CPP v1.0 features to relevant regulatory requirements.
