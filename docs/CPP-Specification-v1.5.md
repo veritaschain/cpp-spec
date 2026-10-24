@@ -2,6 +2,7 @@
 
 **Version:** 1.5  
 **Status:** Final  
+**Release status (note added 2026-10-25):** Not released. No tagged release exists, so this is not a Released version under the VAP v1.2 §4.5.2 status vocabulary; "Final" above is the label the draft was written with. The current released version is CPP v1.4.  
 **Date:** 2026-01-30  
 **Document ID:** VSO-CPP-SPEC-006  
 **Maintainer:** VeritasChain Standards Organization (VSO)  
