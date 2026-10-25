@@ -959,14 +959,14 @@ JA:
 詳細情報: https://veritaschain.org/provenance-faq"
 ```
 
-### 6.4 Regulatory Compliance Matrix
+### 6.4 Regulatory Relevance Matrix
 
-| Regulation | Requirement | CPP v1.5 Compliance |
+| Regulation | Requirement | CPP v1.5 relevance (not a compliance determination) |
 |------------|-------------|---------------------|
 | **EU AI Act (Art. 50)** | AI content marking | Complementary (not replacement) |
 | **EU GDPR** | Data minimization | On-device processing, no transmission |
 | **EU DSA** | Content transparency | Does not block content |
-| **California AB 853** | Provenance disclosure | Compatible, can fulfill requirement |
+| **California AB 853** | Provenance disclosure | May support; not a compliance determination (VAP v1.2 §1.6) |
 | **China AI Labeling** | Explicit + implicit labels | Supports both visual and invisible marks |
 | **Japan景品表示法** | No false endorsement | Prohibited terms list enforced |
 | **FTC Guidelines** | No deceptive practices | Clear disclaimers required |
@@ -1168,7 +1168,7 @@ Future versions MAY support SCITT (Supply Chain Integrity, Transparency, and Tru
     "Functionality": {
       "LogAnchoring": "Record signature hash in transparency log",
       "ReceiptVerification": "Verify SCITT receipt in manifest",
-      "NonRepudiation": "Prevent backdating and deletion denial"
+      "NonRepudiation": "Make backdating and deletion denial detectable"
     },
     "DesignConsiderations": {
       "Privacy": "Only hash values logged, not content",
@@ -1554,7 +1554,7 @@ components:
 - RFC 8785 (JSON Canonicalization Scheme)
 - C2PA Specification v2.1
 - C2PA UX Recommendations
-- IETF SCITT Architecture (draft)
+- RFC 9943: An Architecture for Trustworthy and Transparent Digital Supply Chains (SCITT), June 2026
 - Apple App Extension Programming Guide
 - Android Intent and Intent Filters
 - EU AI Act (Regulation 2024/1689)

@@ -140,6 +140,14 @@ The Bronze / Silver / Gold levels of CPP v1.0–v1.1 are superseded.
 > - **Merkle domain separation.** VAP v1.2 §4.1.4 requires RFC 6962 leaf/node prefixes (0x00 / 0x01). CPP v1.3/v1.4 compute `LeafHash = SHA256(EventHash)` and `SHA256(Left || Right)` without prefixes and pad by duplicating the last leaf (CPP v1.4 Appendix C).
 > - **Merkle batching.** INT-006 requires Merkle batching and external anchoring of signed roots at every level; CPP-TIMESTAMPED has no Merkle batching.
 > - **Completeness binding.** INT-008 requires each anchor record to bind event count, first/last event identifiers, and a policy identifier; the CPP anchor data model (v1.3 §4) binds the tree size only.
+> - **"Completeness Invariant" naming.** The XOR-sum construction of CPP v1.0 (SEAL with `HashSum`) was removed from the specification series in v1.1, but [`draft-vso-cpp-core-04`](https://datatracker.ietf.org/doc/draft-vso-cpp-core/) §4.1.5 still defines it under the name "Completeness Invariant". It is not VAP INT-008: it binds no policy identifier, and the I-D form binds timestamps rather than first/last event identifiers. *(Recorded 2026-10-25.)*
+> - **Signature algorithm.** CPP v1.1 requires ES256 (ECDSA P-256), and v1.4 §5.4 uses an ECDSA P-256 signature; VAP v1.2 §4.1.5 lists Ed25519 (DEFAULT) and ECDSA secp256k1 (SUPPORTED) but not P-256, and only listed algorithms are eligible for conformance claims. *(Recorded 2026-10-25.)*
+> - **Numeric encoding.** VAP v1.2 §7.2 requires numeric values to be encoded as strings; CPP v1.4 examples (e.g. `FocalLength`, `Aperture`, `ISO`) use JSON numbers. *(Recorded 2026-10-25.)*
+
+> **Errata candidates in released texts** (recorded 2026-10-25; the released files are not edited):
+> - CPP v1.4 §5.4: `cpp_event_minimal_t` is annotated "Total: 113 bytes"; its fields sum to 114 bytes before padding.
+> - CPP v1.3 §2.2: the rationale says the leaf construction prevents second-preimage attacks and "Follows RFC 6962 conventions", but v1.3 uses no 0x00/0x01 prefixes (see "Merkle domain separation" above).
+> - The JSON files in [`examples/`](examples/) are illustrative: their timestamp tokens, certificates and attestation objects are placeholders that do not satisfy the schema patterns, and `verification-pack.json` reuses the media hash as `leaf_hash`.
 
 ---
 
