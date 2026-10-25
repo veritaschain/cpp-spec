@@ -153,7 +153,7 @@ The Bronze / Silver / Gold levels of CPP v1.0–v1.1 are superseded.
 
 | Body | Document | Status |
 |------|----------|--------|
-| IETF | [`draft-vso-cpp-core-03`](https://datatracker.ietf.org/doc/draft-vso-cpp-core/) | Individual Internet-Draft, active. Not adopted by any IETF Working Group; no standing in the IETF standards process. Its title still reads "Content Provenance Profile" and is to be corrected to "Capture Provenance Profile" at the next revision |
+| IETF | [`draft-vso-cpp-core-04`](https://datatracker.ietf.org/doc/draft-vso-cpp-core/) (posted 2026-10-24) | Individual Internet-Draft, active. Not adopted by any IETF Working Group; no standing in the IETF standards process. Revision -04 corrected the title to "Capture Provenance Profile (CPP) Core" |
 
 ---
 
