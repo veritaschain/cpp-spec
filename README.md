@@ -20,7 +20,7 @@ A VAP v1.2 conformance mapping for CPP v1.4 is due and not yet published. Until 
 
 ### Implementation status (mandatory disclosure)
 
-As of September 2026: **zero external implementations** of CPP or any other VAP profile, and **zero Evidence Packs accepted in any proceeding**.
+As of 25 October 2026: **zero external implementations** of CPP or any other VAP profile, and **zero Evidence Packs accepted in any proceeding**. How these items will be counted is set out in VSO's [proposed counting criteria](https://github.com/veritaschain/vap-spec/blob/main/disclosures/2026-10-24-counting-criteria.md).
 
 **Commercial disclosure correction — 24 October 2026:** the previously published paid-service contract figure and associated commercial details have not been substantiated through reconciliation with primary records. The claim is withdrawn pending verification; this does **not** establish a count of zero. No verified contract count, customer count or revenue figure is asserted here. Commercial activity is separate from external implementation, independent validation and Evidence Pack acceptance. See the [dated correction and counting criteria](https://github.com/veritaschain/vap-spec/blob/main/disclosures/2026-10-24-commercial-contracts.md). Fixed distributions and historical evidence remain unchanged. Where a VeritasChain product implements CPP, it is a first-party implementation: VSO and VeritasChain Co., Ltd. share a founder.
 
