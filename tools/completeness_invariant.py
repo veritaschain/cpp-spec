@@ -21,7 +21,8 @@ def canonicalize(obj: dict) -> bytes:
     """
     Simplified canonicalization, NOT RFC 8785-conformant.
 
-    json.dumps(sort_keys=True) sorts keys by code point rather than by
+    Keys are sorted with sorted(d.items()) and serialized with json.dumps
+    (ensure_ascii=False). That sorts keys by code point rather than by
     UTF-16 code unit and formats numbers differently (e.g. 1.0 stays
     "1.0"). This is a CPP v1.0 tool (the XOR-sum invariant was removed
     in CPP v1.1). For any real use, use an RFC 8785 library.
