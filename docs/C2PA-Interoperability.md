@@ -1,5 +1,7 @@
 # CPP-C2PA Interoperability Guide
 
+> **Status note — 25 October 2026.** This guide (VSO-CPP-C2PA-001 v1.0, 2026-01-18) was written against CPP v1.0. Since then: the XOR-sum Completeness Invariant and SEAL event were removed in CPP v1.1 (deletion of anchored events is detected against TSA-anchored Merkle batches instead); the Bronze / Silver / Gold levels were replaced by CPP-BASIC … CPP-FULL; and CPP-BASIC (CPP v1.4 §8.1) has no external anchor. The current release is CPP v1.4. See the [README](../README.md) for the current status and the known divergences from VAP v1.2. The tables below are kept as written.
+
 ## Overview
 
 CPP (Capture Provenance Profile) is designed to **complement** C2PA, not replace it.
@@ -114,7 +116,7 @@ Namespace: `vso.cpp`
 ### What CPP Adds Over C2PA
 
 1. **Completeness Invariant** - Detects deleted events
-2. **Mandatory External Anchor** - Prevents self-attestation abuse
+2. **External Anchor (TSA)** - Mitigates self-attestation abuse (required from CPP-TIMESTAMPED; not at CPP-BASIC)
 3. **Privacy by Design** - Location OFF by default
 4. **Clear Terminology** - "Provenance Available" not "Verified"
 
