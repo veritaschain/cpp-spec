@@ -148,6 +148,7 @@ The Bronze / Silver / Gold levels of CPP v1.0–v1.1 are superseded.
 > - CPP v1.4 §5.4: `cpp_event_minimal_t` is annotated "Total: 113 bytes"; its fields sum to 114 bytes before padding.
 > - CPP v1.3 §2.2: the rationale says the leaf construction prevents second-preimage attacks and "Follows RFC 6962 conventions", but v1.3 uses no 0x00/0x01 prefixes (see "Merkle domain separation" above). §9.1 repeats the claim ("Matches RFC 6962 security model").
 > - The JSON files in [`examples/`](examples/) are illustrative placeholders (timestamp tokens, certificates, attestation objects). `cpp-ace/capture-att-event.json` does not validate against its payload schema (`attestation_object` pattern; unexpected `camera_settings`, `collection_id`, `media_size_bytes`), and `cpp-core/verification-pack.json` reuses the media hash as `leaf_hash`.
+> - CPP v1.5 (not released) §6.3.3: the sample L3 disclosure text, in English and Japanese, ends with `https://veritaschain.org/provenance-faq`. No page is published at that address. *(Recorded 2026-11-20.)*
 
 ---
 
