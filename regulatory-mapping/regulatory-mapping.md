@@ -68,6 +68,8 @@ This document maps CPP v1.0 features to relevant regulatory requirements.
 
 ## MiFID II / RTS 25 (If CPP used for financial documentation)
 
+> **Note (2026-11-21).** RTS 25 (Delegated Regulation (EU) 2017/574) was repealed with effect from 2 March 2026. EU business-clock synchronisation is now set by [Delegated Regulation (EU) 2025/1155](https://eur-lex.europa.eu/eli/reg_del/2025/1155/oj), Articles 11–16. The heading and table below are kept as written for CPP v1.0 and have not been re-checked against the replacement text.
+
 | Requirement | CPP Feature | Notes |
 |-------------|-------------|-------|
 | Timestamp accuracy | RFC 3161 TSA | External verification |
